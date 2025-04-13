@@ -19,9 +19,9 @@ def generate_chapter(tag: str, word_count: int) -> str:
 
     prompt = PROMPT_TEMPLATES[tag] + f" The chapter should be around {word_count} words long."
 
-    model = genai.GenerativeModel(model_name="gemini-pro")
-    chat = model.start_chat(history=[])
-    response = chat.send_message(prompt)
+    # Use the correct model name with full path
+    model = genai.GenerativeModel(model_name="models/gemini-pro")  # 👈 important fix
+    response = model.generate_content(prompt)
 
     return response.text
 
@@ -29,7 +29,6 @@ def generate_chapter(tag: str, word_count: int) -> str:
 st.title("📖 AI Novel Chapter Generator")
 
 selected_tag = st.selectbox("Choose a genre:", list(PROMPT_TEMPLATES.keys()))
-
 word_count = st.slider("Select desired word count:", min_value=100, max_value=3000, step=100, value=500)
 
 if st.button("Generate Chapter"):
