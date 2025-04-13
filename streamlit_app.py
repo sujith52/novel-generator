@@ -19,8 +19,9 @@ def generate_chapter(tag: str, word_count: int) -> str:
 
     prompt = PROMPT_TEMPLATES[tag] + f" The chapter should be around {word_count} words long."
 
-    model = genai.GenerativeModel(model_name="models/gemini-pro")
-    response = model.generate_content(prompt)
+    model = genai.GenerativeModel(model_name="gemini-pro")
+    chat = model.start_chat(history=[])
+    response = chat.send_message(prompt)
 
     return response.text
 
