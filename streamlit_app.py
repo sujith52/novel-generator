@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # 🔑 Replace with your actual Gemini API key
-genai.configure(api_key="YOUR_GEMINI_API_KEY")
+genai.configure(api_key="AIzaSyBD8FxH90_NPS1PvgCPpJYZExwJYCWoSUQ")
 
 # Prompt templates for genres
 PROMPT_TEMPLATES = {
