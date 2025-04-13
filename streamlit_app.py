@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 # 🔑 Replace with your actual Gemini API key
-genai.configure(api_key="AIzaSyBD8FxH90_NPS1PvgCPpJYZExwJYCWoSUQ")
+genai.configure(api_key="YOUR_GEMINI_API_KEY")
 
 # Prompt templates for genres
 PROMPT_TEMPLATES = {
@@ -19,7 +19,7 @@ def generate_chapter(tag: str, word_count: int) -> str:
 
     prompt = PROMPT_TEMPLATES[tag] + f" The chapter should be around {word_count} words long."
 
-    model = genai.GenerativeModel("gemini-pro")
+    model = genai.GenerativeModel(model_name="models/gemini-pro")
     response = model.generate_content(prompt)
 
     return response.text
@@ -27,10 +27,7 @@ def generate_chapter(tag: str, word_count: int) -> str:
 # Streamlit UI
 st.title("📖 AI Novel Chapter Generator")
 
-selected_tag = st.selectbox(
-    "Choose a genre:",
-    list(PROMPT_TEMPLATES.keys())
-)
+selected_tag = st.selectbox("Choose a genre:", list(PROMPT_TEMPLATES.keys()))
 
 word_count = st.slider("Select desired word count:", min_value=100, max_value=3000, step=100, value=500)
 
